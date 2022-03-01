@@ -2,6 +2,11 @@ package za.co.wethinkcode.examples.hangman;
 
 import java.util.Random;
 
+
+/**
+ * Answer --- Object signifying an answer from a game of hangman
+ * @author Morgan Moss
+ */
 public class Answer {
     /**
      * The word stored in this answer
