@@ -7,39 +7,48 @@ import java.io.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+
 class HangmanTest {
-    private void simulateGame(String simulatedUserInput, String expectedLastLine) {                     //<1>
-        InputStream simulatedInputStream = new ByteArrayInputStream(simulatedUserInput.getBytes());     //<2>
-        System.setIn(simulatedInputStream);                                                             //<3>
+    private void simulateGame(String simulatedUserInput, String expectedLastLine) {                     
+        InputStream simulatedInputStream = new ByteArrayInputStream(simulatedUserInput.getBytes());     
+        System.setIn(simulatedInputStream);                                                             
 
-        ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();                         //<4>
-        System.setOut(new PrintStream(outputStreamCaptor));                                             //<5>
+        ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();                         
+        System.setOut(new PrintStream(outputStreamCaptor));                                             
 
-        try {                                                                                           //<6>
-            Hangman.main(new String[]{});                                                               //<7>
-        } catch (IOException e) {                                                                       //<8>
-            fail("Not expecting an exception.");                                                        //<9>
+        try {                                                                                           
+            Hangman.main(new String[]{});                                                               
+        } catch (IOException e) {                                                                       
+            fail("Not expecting an exception.");                                                        
         }
 
-        String[] linesOutput = outputStreamCaptor.toString().split("\n");                               //<10>
-        String lastLine = linesOutput[linesOutput.length - 1];                                          //<11>
-        assertEquals(expectedLastLine, lastLine);                                                       //<12>
+        String[] linesOutput = outputStreamCaptor.toString().split("\n");                               
+        String lastLine = linesOutput[linesOutput.length - 1];                                          
+        assertEquals(expectedLastLine, lastLine);                                                       
     }
 
 
     @Test
     public void shouldWinTheGame() {
-        String simulatedUserInput = "oneword.txt\nt\ne\ns\n";                                           //<1>
-        String expectedOutput = "That is correct! You escaped the noose .. this time.";                 //<2>
-        simulateGame(simulatedUserInput, expectedOutput);                                               //<3>
+        String simulatedUserInput = "my_one_word.txt\np\na\ni\nn\n";                                           
+        String expectedOutput = "That is correct! You escaped the noose .. this time.";                 
+        simulateGame(simulatedUserInput, expectedOutput);                                               
+    }
+
+
+    @Test
+    public void shouldWinTheGameOneChanceLeft() {
+        String simulatedUserInput = "my_one_word.txt\na\nn\nd\no\nw\np\ni\n";                                           
+        String expectedOutput = "That is correct! You escaped the noose .. this time.";                 
+        simulateGame(simulatedUserInput, expectedOutput);                                               
     }
 
     
     @Test
     public void shouldLoseTheGame() {
-        String simulatedUserInput = "oneword.txt\na\nb\nc\nd\nx\n";                                     //<1>
-        String expectedOutput = "Sorry, you are out of guesses. The word was: test";                    //<2>
-        simulateGame(simulatedUserInput, expectedOutput);                                               //<3>
+        String simulatedUserInput = "my_one_word.txt\ns\nu\nf\nf\ne\nr\ni\nn\ng\n";                                     
+        String expectedOutput = "Sorry, you are out of guesses. The word was: pain";                    
+        simulateGame(simulatedUserInput, expectedOutput);                                               
     }
 }
 

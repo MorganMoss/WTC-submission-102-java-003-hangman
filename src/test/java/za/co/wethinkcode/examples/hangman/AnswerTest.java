@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
 public class AnswerTest {
     @Test
     public void testToString() {
@@ -19,7 +20,7 @@ public class AnswerTest {
         assertFalse(a.equals(b));                                                                               
     }
 
-    
+
     @Test
     public void testEqualsTrueCase() {
         Answer a = new Answer("doing");
