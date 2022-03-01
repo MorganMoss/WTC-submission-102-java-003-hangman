@@ -7,10 +7,7 @@ import java.io.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-// tag::header[]
 class HangmanTest {
-    // end::header[]
-    // tag::simulate[]
     private void simulateGame(String simulatedUserInput, String expectedLastLine) {                     //<1>
         InputStream simulatedInputStream = new ByteArrayInputStream(simulatedUserInput.getBytes());     //<2>
         System.setIn(simulatedInputStream);                                                             //<3>
@@ -29,8 +26,7 @@ class HangmanTest {
         assertEquals(expectedLastLine, lastLine);                                                       //<12>
     }
 
-    // end::simulate[]
-    // tag::test-win[]
+
     @Test
     public void shouldWinTheGame() {
         String simulatedUserInput = "oneword.txt\nt\ne\ns\n";                                           //<1>
@@ -38,15 +34,12 @@ class HangmanTest {
         simulateGame(simulatedUserInput, expectedOutput);                                               //<3>
     }
 
-    // end::test-win[]
-    // tag::test-lose[]
+    
     @Test
     public void shouldLoseTheGame() {
         String simulatedUserInput = "oneword.txt\na\nb\nc\nd\nx\n";                                     //<1>
         String expectedOutput = "Sorry, you are out of guesses. The word was: test";                    //<2>
         simulateGame(simulatedUserInput, expectedOutput);                                               //<3>
     }
-    // end::test-lose[]
-// tag::footer[]
 }
-// end::footer[]
+
