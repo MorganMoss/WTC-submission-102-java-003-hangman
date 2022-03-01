@@ -53,10 +53,11 @@ public class Answer {
     public Answer getHint(Answer lastAnswer, char letter){
         String newAnswer = "";
         for(int i = 0; i < lastAnswer.toString().length(); i++){
-            if (letter == word.charAt(i)){newAnswer += letter;}
+            if (letter == word.toUpperCase().charAt(i) 
+               || letter == word.toLowerCase().charAt(i) ){newAnswer += letter;}
             else {newAnswer += lastAnswer.toString().charAt(i);}
         }
-        return new Answer(newAnswer);
+        return new Answer(newAnswer.toLowerCase());
     }
 
     
@@ -65,7 +66,10 @@ public class Answer {
      * @param letter : The letter you are looking for in answer
      * @return (boolean) : True if letter is in this Answer, otherwise False
      */
-    public boolean hasLetter(char letter){return word.indexOf(letter) != -1;}
+    public boolean hasLetter(char letter){
+        return word.toUpperCase().indexOf(letter) 
+             + word.toLowerCase().indexOf(letter) != -2;
+    }
 
 
     /**
