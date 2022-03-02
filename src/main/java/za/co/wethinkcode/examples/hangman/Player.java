@@ -12,10 +12,6 @@ public class Player {
      * The amount of chances this player has before game over
      */
     private int chances;
-                // /**
-                //  * The object this Player is using to provide input
-                //  */
-                // private InputStream input;
     /**
      * The scanner used to traverse input
      */
@@ -82,9 +78,7 @@ public class Player {
     public String getWordsFile(){
         System.out.println("Words file? [leave empty to use short_words.txt]");
         String result = getGuess();
-        
-        if (result != ""){return result;}
-        return defaultTextFile;
+        return result.isBlank() ? defaultTextFile : result;
     }
     
 
@@ -94,8 +88,6 @@ public class Player {
      */
     public boolean wantsToQuit(){ 
         return in.toLowerCase().equals("quit")||in.toLowerCase().equals("exit");
-        // return inputScanner.hasNext("quit") || inputScanner.hasNext("exit")
-        //        || in == "quit" || in == "exit";
     }
 
 
